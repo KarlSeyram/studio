@@ -21,7 +21,7 @@ import { getSupabase, type Ebook } from "@/lib/supabase";
 import { useToast } from "@/hooks/use-toast";
 import Image from "next/image";
 
-export default function EbookEditPage({ params }: { params: { id: string } }) {
+export default function EbookEditPage({ params: { id } }: { params: { id: string } }) {
   const { toast } = useToast();
   const router = useRouter();
   const [ebook, setEbook] = useState<Ebook | null>(null);
@@ -34,10 +34,10 @@ export default function EbookEditPage({ params }: { params: { id: string } }) {
   const [isFetching, setIsFetching] = useState(true);
   const [coverImageUrl, setCoverImageUrl] = useState<string | null>(null);
 
-  const fetchEbook = useCallback(async (id: number) => {
+  const fetchEbook = useCallback(async (ebookId: number) => {
     setIsFetching(true);
     const supabase = getSupabase();
-    const { data, error } = await supabase.from('ebooks').select('*').eq('id', id).single();
+    const { data, error } = await supabase.from('ebooks').select('*').eq('id', ebookId).single();
 
     if (error || !data) {
       toast({
@@ -63,11 +63,11 @@ export default function EbookEditPage({ params }: { params: { id: string } }) {
   }, [toast]);
 
   useEffect(() => {
-    const ebookId = parseInt(params.id, 10);
+    const ebookId = parseInt(id, 10);
     if (!isNaN(ebookId)) {
       fetchEbook(ebookId);
     }
-  }, [params.id, fetchEbook]);
+  }, [id, fetchEbook]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -177,7 +177,7 @@ export default function EbookEditPage({ params }: { params: { id: string } }) {
                     id="price"
                     type="number"
                     value={price}
-                    onChange={(e) => setPrice(parseFloat(e.gittarget.value) || 0)}
+                    onChange={(e) => setPrice(parseFloat(e.target.value) || 0)}
                   />
                 </div>
                  <div className="grid gap-3">
@@ -239,5 +239,3 @@ export default function EbookEditPage({ params }: { params: { id: string } }) {
     </div>
   );
 }
-
-    
