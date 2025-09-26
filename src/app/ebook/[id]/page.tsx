@@ -2,7 +2,7 @@
 "use client";
 
 import Image from "next/image";
-import { notFound } from "next/navigation";
+import { notFound, useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/cart-context";
 import { ShoppingCart, Share2 } from "lucide-react";
@@ -12,7 +12,11 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { getSupabase, type Ebook } from "@/lib/supabase";
 import { useToast } from "@/hooks/use-toast";
 
-export default function EbookDetailPage({ params: { id } }: { params: { id: string } }) {
+export default function EbookDetailPage() {
+  const params = useParams();
+  const { id: idParam } = params;
+  const id = Array.isArray(idParam) ? idParam[0] : idParam;
+
   const { addToCart } = useCart();
   const { toast } = useToast();
   const [ebook, setEbook] = useState<Ebook | null>(null);
@@ -21,6 +25,8 @@ export default function EbookDetailPage({ params: { id } }: { params: { id: stri
   const [coverImageUrl, setCoverImageUrl] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!id) return;
+
     const ebookId = parseInt(id, 10);
     if (isNaN(ebookId)) {
       notFound();

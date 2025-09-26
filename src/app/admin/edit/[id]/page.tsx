@@ -3,7 +3,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import { useRouter, notFound } from "next/navigation";
+import { useRouter, notFound, useParams } from "next/navigation";
 import { ChevronLeft, Upload, Loader2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -21,7 +21,11 @@ import { getSupabase, type Ebook } from "@/lib/supabase";
 import { useToast } from "@/hooks/use-toast";
 import Image from "next/image";
 
-export default function EbookEditPage({ params: { id } }: { params: { id: string } }) {
+export default function EbookEditPage() {
+  const params = useParams();
+  const { id: idParam } = params;
+  const id = Array.isArray(idParam) ? idParam[0] : idParam;
+  
   const { toast } = useToast();
   const router = useRouter();
   const [ebook, setEbook] = useState<Ebook | null>(null);
@@ -63,6 +67,7 @@ export default function EbookEditPage({ params: { id } }: { params: { id: string
   }, [toast]);
 
   useEffect(() => {
+    if (!id) return;
     const ebookId = parseInt(id, 10);
     if (!isNaN(ebookId)) {
       fetchEbook(ebookId);
