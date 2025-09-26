@@ -1,0 +1,17 @@
+{
+  "node": {
+    "408ffbedb72ea503f138bd5ef73448d4e2d0c0c615": {
+      "workers": {
+        "app/page": {
+          "moduleId": "[project]/.next-internal/server/app/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/ai/flows/suggest-ebooks-based-on-purchase-history.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/page": "action-browser"
+      }
+    }
+  },
+  "edge": {},
+  "encryptionKey": "1sXFkRv/Wn8H3tv4I1WCVnJl60Zk3H1irkFMx7Zx3Bo="
+}
