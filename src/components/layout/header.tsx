@@ -32,7 +32,6 @@ export default function Header() {
                 href="/"
                 className="flex items-center gap-2 text-lg font-semibold"
               >
-                <BookOpen className="h-6 w-6" />
                 <span className="font-headline">Hackura</span>
               </Link>
               {navLinks.map(({ href, label, icon: Icon }) => (
@@ -53,7 +52,6 @@ export default function Header() {
         <div className="flex-1 flex justify-start items-center">
             <div className="mr-4 hidden md:flex">
                 <Link href="/" className="flex items-center gap-2">
-                    <BookOpen className="h-6 w-6" />
                     <span className="font-headline text-xl font-bold">Hackura</span>
                 </Link>
             </div>

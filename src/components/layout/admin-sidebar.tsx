@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Package, MessageSquare, Home, BookOpen } from 'lucide-react';
+import { Package, MessageSquare, Home } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 
@@ -20,7 +20,6 @@ export default function AdminSidebar() {
       <div className="flex h-full max-h-screen flex-col gap-2">
         <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
           <Link href="/" className="flex items-center gap-2 font-semibold">
-            <BookOpen className="h-6 w-6" />
             <span className="font-headline text-xl font-bold">Hackura</span>
           </Link>
         </div>
